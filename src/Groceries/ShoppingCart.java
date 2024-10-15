@@ -1,4 +1,4 @@
-package test;
+package Groceries;
 
 import java.io.Console;
 import java.util.ArrayList;
