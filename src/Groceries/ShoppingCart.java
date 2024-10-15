@@ -1,11 +1,8 @@
-package Groceries;
-
 import java.io.Console;
 import java.util.ArrayList;
 
 // add, remove and list the contents of a shopping cart
 public class ShoppingCart {
-
     public static void main(String[] args) {
         
         Console cons = System.console();

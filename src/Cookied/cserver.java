@@ -8,7 +8,7 @@ public class cserver {
     
     public static void main(String[] args) throws IOException {
         
-        int port = Integer.parseInt(args[4]);
+        int port = Integer.parseInt(args[0]);
 
         ServerSocket server = new ServerSocket(port);
 
@@ -40,7 +40,7 @@ public class cserver {
             String readData = data.toString();
             System.out.println("Data read from the file:");
             System.out.println(readData);
-
+            sock.close();
         }
     }
 }

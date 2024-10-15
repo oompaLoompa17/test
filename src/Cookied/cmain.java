@@ -9,11 +9,11 @@ public class cmain {
         
     public static void main(String[] args) throws IOException {
         
-        int port = Integer.parseInt(args[4]);
-        String server = args[3];
+        int port = Integer.parseInt(args[0]);
+        String server = "localhost";
 
         // create a file object to pass file name into
-        File file = new File(args[5]);
+        File file = new File(args[1]);
         String fileName = file.getName();
         Long fileLength = file.length();
 
@@ -53,5 +53,6 @@ public class cmain {
         os.flush();
         writer.flush();
         bw.flush();
+        sock.close();
     }
 }

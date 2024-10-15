@@ -6,11 +6,9 @@ import java.util.Random;
 
 public class cookie {
 
-    public cookie(){
-
-    }
-
-    public String whatCookie(File file, BufferedReader br) throws IOException{
+       public String whatCookie(File file) throws IOException{
+        Reader reader = new FileReader(file);
+        BufferedReader br = new BufferedReader(reader);
         // Read from txt file
         String line;
         ArrayList<String> cookieList = new ArrayList<>();
