@@ -14,7 +14,7 @@ public int itemNo;
     }
 
     public void list (){
-        if (this.groceries.isEmpty()){ //OR if idx == 0 ?
+        if (this.groceries.isEmpty()){ 
             System.out.println("Your cart is empty");
         }
         else {

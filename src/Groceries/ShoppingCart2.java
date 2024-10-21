@@ -1,6 +1,5 @@
 package Groceries;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 // add, remove and list the contents of a shopping cart
@@ -10,11 +9,8 @@ public class ShoppingCart2 {
         
         // check dir name to write file into
         String dirName;
-        if (args.length > 0){
-            dirName = args[0]; 
-        } else{
-            dirName = "db";
-        }
+        if (args.length > 0){dirName = args[0];
+        } else{dirName = "db";}
 
         // create new dir if name is not taken alr
         Dir dir = new Dir();
@@ -24,24 +20,22 @@ public class ShoppingCart2 {
 
         // create a hashset to store shoppers
         HashSet<Shopper> users = new HashSet<>();
+        String username;
 
         System.out.println("Welcome to your shopping cart!");
 
         while (true) {
 
+            // store command line args in String array
             String input = cons.readLine("> ").trim();
-
-            // store command sentence in array
             String[] text = input.split(" "); 
-            
-            // check array for strings that contain "," and replace with ""
             for (int i=0; i < text.length; i++){
                 text[i] = text[i].replace(",","");
             }
 
             // help how do i instantiate new users??
             if (text[0].equalsIgnoreCase("login")){
-                String username = text[1];
+                username = text[1];
                 
                 // Check if the user is already logged in
                 boolean userExists = users.stream().anyMatch(shopper -> shopper.getName().equals(username));
@@ -52,6 +46,7 @@ public class ShoppingCart2 {
                 } else {
                     // Create a new Shopper
                     Shopper shopper = new Shopper(username);
+                    shopper.list();
                     users.add(shopper);  // Add the new shopper to the HashSet
 
                     // Optionally create the user's grocery list file
@@ -63,10 +58,12 @@ public class ShoppingCart2 {
                 continue; // Continue to the next loop iteration
             }
             
+            
 
             switch (text[0].toLowerCase()) {
 
                 case "list":
+                    shopper.getName = username;
                     shopper.list();
                     break;
 
@@ -126,7 +123,7 @@ public class ShoppingCart2 {
         
     }
 
-    // Method to find a Shopper by name
+    //Method to find a Shopper by name
     public static Shopper findShopperByName(HashSet<Shopper> users, String name) {
         for (Shopper shopper : users) {
             if (shopper.getName().equalsIgnoreCase(name)) {
