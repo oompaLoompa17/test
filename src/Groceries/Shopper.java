@@ -47,13 +47,13 @@ public int itemNo;
         }
     }
 
-    public ArrayList<String> getGroceries() {return groceries;}
+    public ArrayList<String> getGroceries() {return this.groceries;}
     public void setGroceries(ArrayList<String> groceries) {this.groceries = groceries;}
 
-    public String getName() {return name;}
+    public String getName() {return this.name;}
     public void setName(String name) {this.name = name;}
 
-    public int getItemNo() {return itemNo;}
+    public int getItemNo() {return this.itemNo;}
     public void setItemNo(int itemNo) {this.itemNo = itemNo;}
 
     

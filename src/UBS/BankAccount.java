@@ -9,7 +9,7 @@ public class BankAccount {
     private final String name;
     private final String accNo;
     private float accBal;
-    private ArrayList<String> ledger;
+    private ArrayList<String> ledger = new ArrayList<>();
     private boolean isOpen; 
     private final LocalDateTime openDate;
     private LocalDateTime closeDate;
@@ -33,8 +33,8 @@ public class BankAccount {
         String stringNo = "";
         StringBuilder stringBuilder = new StringBuilder(9);
 
-        for (int i=0; i < 9; i++){
-            int no = random.nextInt(9);
+        for (int i=0; i < 3; i++){
+            int no = random.nextInt(3);
             stringNo = String.valueOf(no);
             stringBuilder.append(stringNo);
         }
@@ -43,20 +43,27 @@ public class BankAccount {
     }
 
     public void deposit (float amt){
-        if (amt <= 0 || !isOpen){
+        if (amt <= 0 || !this.isOpen){
             throw new IllegalArgumentException("goddamn who u being funny for??");
         }else{
             this.accBal += amt;
-            this.ledger.add("Deposit $" + amt + " at " + LocalDateTime.now());
+            this.ledger.add("Deposited $" + amt + " at " + LocalDateTime.now());
+            System.out.println(this.ledger);
         }
     }
 
     public void withdraw (float amt){
-        if (amt <= 0 || amt > accBal || !isOpen){
+        if (amt <= 0 || amt > this.accBal || !this.isOpen){
             throw new IllegalArgumentException("goddamn who u being funny for??");
         }else{
             this.accBal -= amt;
-            this.ledger.add("Withdraw $" + amt + " at " + LocalDateTime.now());
+            this.ledger.add("Withdrew $" + amt + " at " + LocalDateTime.now());
+        }
+    }
+
+    public void list (){
+        for (String s : this.ledger) {
+            System.out.println(s);
         }
     }
 

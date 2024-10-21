@@ -21,7 +21,7 @@ public class ShoppingCart2 {
         // create a hashset to store shoppers
         HashSet<Shopper> users = new HashSet<>();
         String username;
-
+        Shopper proxy = null;
         System.out.println("Welcome to your shopping cart!");
 
         while (true) {
@@ -33,38 +33,36 @@ public class ShoppingCart2 {
                 text[i] = text[i].replace(",","");
             }
 
-            // help how do i instantiate new users??
             if (text[0].equalsIgnoreCase("login")){
                 username = text[1];
-                
-                // Check if the user is already logged in
-                boolean userExists = users.stream().anyMatch(shopper -> shopper.getName().equals(username));
-                
-                if (userExists) {
-                    System.out.printf("%s is already logged in.\n", username);
-                    // Optionally, handle listing the user's cart here
-                } else {
-                    // Create a new Shopper
-                    Shopper shopper = new Shopper(username);
-                    shopper.list();
-                    users.add(shopper);  // Add the new shopper to the HashSet
-
-                    // Optionally create the user's grocery list file
-                    File glist = new File(dirName + "/" + username + ".txt");
-                    glist.createNewFile();
-
-                    System.out.printf("Welcome, %s! You have been logged in.\n", username);
+                for (Shopper user : users){                         // WHY THIS LINE DONT WORK
+                    System.out.println("0");
+                    if (username.equalsIgnoreCase(user.getName())) {
+                        System.out.printf("%s is already logged in.\n", username);
+                    } else {
+                        // Create a new Shopper
+                        Shopper shopper = new Shopper(username);
+                        System.out.println("1");
+                        proxy = shopper;
+                        System.out.println("2");
+                        shopper.list();
+                        System.out.println("3");
+                        users.add(shopper);  // Add the new shopper to the HashSet
+                        System.out.println("4");
+                        // Optionally create the user's grocery list file
+                        File glist = new File(dirName + "/" + username + ".txt");
+                        System.out.println("5");
+                        glist.createNewFile();
+                        System.out.println("6");
+                        System.out.printf("Welcome, %s! You have been logged in.\n", username);
+                    }
                 }
-                continue; // Continue to the next loop iteration
             }
             
-            
-
             switch (text[0].toLowerCase()) {
 
                 case "list":
-                    shopper.getName = username;
-                    shopper.list();
+                    proxy.list();
                     break;
 
                 case "add":            
@@ -73,54 +71,29 @@ public class ShoppingCart2 {
                         if (s.equals("add")) {
                             continue;
                         }
-                        shopper.add(s);
+                        proxy.add(s);
                     }
                     break;
 
                 case "delete":
                     int itemdx = Integer.parseInt(text[1]);
-                    shopper.delete(itemdx);
+                    proxy.delete(itemdx);
+                break;
 
                 case "save":
                     // output stream
                     FileWriter fw = new FileWriter(dirName);
                     BufferedWriter bw = new BufferedWriter(fw);
-                    
+                    for (String s : proxy.groceries){
+                        bw.write(s);
+                    }
                 break;
-
-                // case "login":
-                //     String user = text[1];
-
-                //     File glist = new File(dirName + "/" + text[1] + ".txt");
-                //     BufferedInputStream br = new BufferedInputStream(new FileInputStream(glist));
-
-                //     // user exists
-                //     if (users.contains(user)){
-                //         // and list is empty
-                //         if (groceries.isEmpty()){
-                //             System.out.printf("%s, your cart is empty.", user);
-                //         // and list has items
-                //         } else{
-                //             System.out.printf("%s, your cart contains the following items\n", user);
-                //             for (int i=1; i <= groceries.size(); i++) {
-                //                 System.out.printf("%d. %s\n", i, groceries.get(i-1));
-                //             }
-                //         }    
-
-                //     // if user is new    
-                //     } else {
-                //         users.add(text[1]);
-                //         glist.createNewFile();
-                //     }    
-                
-                // break;
                 
                 case "users":
+                    System.out.println("The following users are registered: " + users);
                 break;
                 }
         }
-
-        
     }
 
     //Method to find a Shopper by name
