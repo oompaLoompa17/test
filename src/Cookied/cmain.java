@@ -14,9 +14,6 @@ public class cmain {
 
         // create a file object to pass file name into
         File file = new File(args[1]);
-        String fileName = file.getName();
-        Long fileLength = file.length();
-
 
         System.out.println("Connecting to the server");
         Socket sock = new Socket(server, port);
